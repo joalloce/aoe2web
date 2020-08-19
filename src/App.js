@@ -1,26 +1,26 @@
-import React from "react";
-import { Box, Typography, Container } from "@material-ui/core";
-import {
-  useCivilization,
-  useUnit,
-  useTechnology,
-  useStructure,
-} from "./service/useAOE2API";
+import React,{useState} from "react";
+import Navbar from "./components/Navbar";
+import Civilizations from "./components/Civilizations";
+import Units from "./components/Units";
+import Strutures from "./components/Structures";
+import Technologies from "./components/Technologies";
+
 function App() {
-  const [civList] = useCivilization(1);
-  const [unitList] = useUnit(1);
-  console.log(civList);
-  console.log(unitList);
-  const [strList] = useStructure(1);
-  const [techList] = useTechnology(1);
-  console.log(strList);
-  console.log(techList);
+  const [key, setKey] = useState("civilizations")
+
   return (
-    <Container maxWidth="sm">
-      <Box my={4}>
-        <Typography variant="h3" component="h1"></Typography>
-      </Box>
-    </Container>
+    <>
+    <h1>Age of Empires II Info</h1>
+    <Navbar setKey={setKey}></Navbar>
+    <div className="content">
+      {{
+        'civilizations': <Civilizations/>,
+        'units': <Units/>,
+        'structures': <Strutures/>,
+        'technologies': <Technologies/>
+      }[key]}
+    </div>
+    </>
   );
 }
 
